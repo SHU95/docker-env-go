@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+    build: #指定したディレクトリにあるdockerfileでコンテナを起動する
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    ports:
+      # ポートを指定
+      - "3306:3306"
+    volumes:
+      # 初期データを入れる時にSQLが格納されているディレクトリ ./docker/mysql/db(ローカル) /docker-entrypoint-initdb.d(コンテナ)
+      - ./docker/mysql/db:/docker-entrypoint-initdb.d
+      # mysqlの永続化するときにマウントするディレクトリ .docker/mysql/db/mysql_data(ローカル) /var/lib/mysql(コンテナ)
+      - .docker/mysql/db/mysql_data:/var/lib/mysql
+
+      # mysql関連の設定
+    environment:
+      MYSQL_ROOT_PASSWORD: go-root
+      MYSQL_DATABASE: go_api
+      MYSQL_USER: user
+      MYSQL_PASSWORD: go-user
+
+  api:
+    build: #指定したディレクトリにあるdockerfileでコンテナを起動する
+      context: .
+      dockerfile: ./docker/go/Dockerfile
+    volumes:
+      - ./:/go/src/github.com/SHU95/docker-env-go/go-api
+    ports:
+      - "8080:8080"
+
+    depends_on: #dbが起動 -> apiが次に起動
+      - db
