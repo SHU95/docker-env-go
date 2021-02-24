@@ -25,7 +25,7 @@ services:
       context: .
       dockerfile: ./docker/go/Dockerfile
     volumes:
-      - ./:/go/src/github.com/SHU95/docker-env-go/go-api
+      - ./:/go/src/github.com/SHU95/docker-env-go
     ports:
       - "8080:8080"
 
