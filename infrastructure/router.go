@@ -18,7 +18,7 @@ func Init() {
 
 	e.GET("/users/:id", func(context echo.Context) error { return userController.GetUser(context) })
 
-	e.POST("/users", func(context echo.Context) error { return userController.CreateUser(context) })
+	e.POST("/user/create", func(context echo.Context) error { return userController.CreateUser(context) })
 
 	e.PUT("/users/:id", func(context echo.Context) error { return userController.UpdateUser(context) })
 

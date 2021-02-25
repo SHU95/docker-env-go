@@ -18,7 +18,7 @@ func NewMySqlDb() database.SqlHandler {
 	// DBのコネクション情報
 	USER := "root"
 	PASS := "golang"
-	PROTOCOL := "tcp(go-container:3306)"
+	PROTOCOL := "tcp(db-container:3306)"
 	DBNAME := "go_api"
 
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
