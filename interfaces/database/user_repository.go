@@ -17,12 +17,12 @@ func (userRepo *UserRepository) FindbyID(id int) (user domain.User, err error) {
 }
 
 //mysqlに作ったユーザーを格納
-func (userRepo *UserRepository) Store(createUser domain.User) (user domain.User, err error) {
-	err = userRepo.Create(&createUser).Error
+func (userRepo *UserRepository) Store(storeUser domain.User) (user domain.User, err error) {
+	err = userRepo.Create(&storeUser).Error
 	if err != nil {
 		return
 	}
-	user = createUser
+	user = storeUser
 	return
 }
 
