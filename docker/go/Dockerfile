@@ -4,7 +4,7 @@ FROM golang:latest
 ENV GO111MODULE=on
 
 # アプリケーションを実行するディレクトリを指定
-WORKDIR /go/src/github.com/SHU95/go-rest-api
+WORKDIR /go/src/github.com/SHU95/docker-env-go
 
 # 上記のディレクトリにgo.modとgo.sumをコピー
 COPY go.mod go.sum ./

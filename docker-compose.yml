@@ -4,6 +4,7 @@ services:
     build: #指定したディレクトリにあるdockerfileでコンテナを起動する
       context: .
       dockerfile: ./docker/mysql/Dockerfile
+    container_name: db-container
     ports:
       # ポートを指定
       - "3306:3306"
@@ -24,6 +25,7 @@ services:
     build: #指定したディレクトリにあるdockerfileでコンテナを起動する
       context: .
       dockerfile: ./docker/go/Dockerfile
+    container_name: go-container
     volumes:
       - ./:/go/src/github.com/SHU95/docker-env-go
     ports:

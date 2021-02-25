@@ -5,7 +5,7 @@ import (
 )
 
 type UserInteractor struct {
-	userRepository UserRepository
+	UserRepository UserRepository
 }
 
 func (interactor *UserInteractor) UserById(id int) (user domain.User, err error) {
@@ -19,6 +19,6 @@ func (interactor *UserInteractor) Add(createUser domain.User) (user domain.User,
 }
 
 func (interactor *UserInteractor) Update(updateUser domain.User) (user domain.User, err error) {
-	user, err = interactor.UserRespository.Update(updateUser)
+	user, err = interactor.UserRepository.Update(updateUser)
 	return
 }

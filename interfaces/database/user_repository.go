@@ -5,10 +5,10 @@ import (
 )
 
 type UserRepository struct {
-	sqlHandler
+	SqlHandler
 }
 
-func (userRepo *UserRepository) FindbyID(id int) (user domain.User, err error) {
+func (userRepo *UserRepository) FindByID(id int) (user domain.User, err error) {
 	err = userRepo.Find(&user, id).Error
 	if err != nil {
 		return
