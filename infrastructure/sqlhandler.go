@@ -48,6 +48,7 @@ func NewMySqlDb() database.SqlHandler {
 }
 
 //DBコンテナを起動確認→apiサーバコンテナを起動
+//シェルで書いた方が良い説ある？docker-composeにentrypointで書く
 
 func open(path string, count unit) (*gorm.DB, error) {
 	db, err := gorm.Open("mysql", path)
