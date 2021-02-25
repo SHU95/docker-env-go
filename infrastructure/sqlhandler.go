@@ -9,7 +9,7 @@ import (
 )
 
 type SqlHandler struct {
-	Conn *gorm.DB
+	conn *gorm.DB
 }
 
 func NewMySqlDb() database.SqlHandler {

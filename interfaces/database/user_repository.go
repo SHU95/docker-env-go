@@ -5,7 +5,7 @@ import (
 )
 
 type UserRepository struct {
-	SqlHandler
+	sqlHandler
 }
 
 func (userRepo *UserRepository) FindbyID(id int) (user domain.User, err error) {
