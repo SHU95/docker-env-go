@@ -13,13 +13,17 @@ type SqlHandler struct {
 	Conn *gorm.DB
 }
 
+const (
+	DBMS     = "mysql"
+	USER     = "user"
+	PASS     = "go-user"
+	PROTOCOL = "tcp(db-container:3306)"
+	DBNAME   = "go_api"
+)
+
 func NewMySqlDb() database.SqlHandler {
 
 	// DBのコネクション情報
-	USER := "root"
-	PASS := "golang"
-	PROTOCOL := "tcp(db-container:3306)"
-	DBNAME := "go_api"
 
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
 
@@ -30,10 +34,6 @@ func NewMySqlDb() database.SqlHandler {
 	}
 
 	//接続確認
-	err = conn.DB().Ping()
-	if err != nil {
-		panic(err)
-	}
 
 	//log 出力
 	conn.LogMode(true)
@@ -51,10 +51,10 @@ func NewMySqlDb() database.SqlHandler {
 //シェルで書いた方が良い説ある？docker-composeにentrypointで書く
 
 func open(path string, count uint) (*gorm.DB, error) {
-	db, err := gorm.Open("mysql", path)
+	db, err := gorm.Open(DBMS, path)
 	if err != nil {
 		if count == 0 {
-			return nil, fmt.Errorf("Retry")
+			return nil, fmt.Errorf("接続できてない")
 		}
 		time.Sleep(time.Second)
 		count--

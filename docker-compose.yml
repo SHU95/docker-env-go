@@ -27,7 +27,7 @@ services:
       dockerfile: ./docker/go/Dockerfile
     container_name: go-container
     volumes:
-      - ./:/go/src/github.com/SHU95/docker-env-go
+      - ./:/github.com/SHU95/docker-env-go
     ports:
       - "8080:8080"
 
