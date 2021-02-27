@@ -1,13 +1,30 @@
 package infrastructure
 
 import (
-	"net/http"
 	"time"
 
+	"github.com/SHU95/docker-env-go/domain"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/labstack/echo"
 )
 
+const (
+	secret  = "tukareteru"
+	id      = "id"
+	iatTime = "iat"
+	expTime = "exp"
+)
+
+func createToken(user domain.User) (string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		id:      user.ID,
+		iatTime: user.CreatedAt.Unix(),
+		expTime: user.CreatedAt.Add(time.Hour * 1000).Unix(),
+	})
+
+	return token.SignedString([]byte(secret))
+}
+
+/*
 func Login() echo.HandlerFunc {
 	return func(context echo.Context) error {
 		username := context.FormValue("username")
@@ -45,3 +62,4 @@ func Restricted() echo.HandlerFunc {
 		return context.String(http.StatusOK, "Welcome"+name+"!")
 	}
 }
+*/
