@@ -32,6 +32,7 @@ func CreateToken(user domain.User) (string, error) {
 
 func VerifyToken(tokenStr string)(domain.User error){
 
+	//tokenを返し先(domain.User　構造体に返してる)
 	parseToken, err := jwt.Parse(tokenStr, func(token *jwt.Token)(interface{}, error){
 
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -40,21 +41,25 @@ func VerifyToken(tokenStr string)(domain.User error){
 		}
 		return []byte(secret), nil
 	})
+	//エラーハンドリング
 	if err != nil {
 		return nil, err
 	}
 	claims, ok := token.Claims.(jwt.Claims)
 
+	//claimsの値が違っていた
 	if !ok {
 		return nil fmt.Errorf("claims ヾ(｡>﹏<｡)ﾉ")
 	}
 	return domain.User, nil
 
+	//idの値が違っていた
 	id, ok := claims[idKey].(float64)
 	if !ok {
 		return nil fmt.Errorf("id ヾ(｡>﹏<｡)ﾉ")
 	}
 
+	//iatの値が違っていた
 	iatTime, ok := claims[iatKey].(float64)
 	if !ok{
 		return nil fmt.Errorf("iat ヾ(｡>﹏<｡)ﾉ")
