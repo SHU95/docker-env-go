@@ -7,7 +7,6 @@ import (
 
 	"github.com/SHU95/docker-env-go/domain"
 	"github.com/dgrijalva/jwt-go"
-	"golang.org/x/tools/go/analysis/passes/nilfunc"
 )
 
 const (
@@ -30,7 +29,7 @@ func CreateToken(user domain.User) (string, error) {
 
 //バリデーションチェック
 
-func VerifyToken(tokenStr string)(domain.User error){
+func VerifyToken(tokenStr string)(error domain.User){
 
 	//tokenを返し先(domain.User　構造体に返してる)
 	parseToken, err := jwt.Parse(tokenStr, func(token *jwt.Token)(interface{}, error){
@@ -56,13 +55,13 @@ func VerifyToken(tokenStr string)(domain.User error){
 	//idの値が違っていた
 	id, ok := claims[idKey].(float64)
 	if !ok {
-		return nil fmt.Errorf("id ヾ(｡>﹏<｡)ﾉ")
+		return nil fmt.Errorf("idヾ(｡>﹏<｡)ﾉ")
 	}
 
 	//iatの値が違っていた
 	iatTime, ok := claims[iatKey].(float64)
 	if !ok{
-		return nil fmt.Errorf("iat ヾ(｡>﹏<｡)ﾉ")
+		return nil fmt.Errorf("iatヾ(｡>﹏<｡)ﾉ")
 	}
 	return (domain.User{
 		ID: uint(id),
